@@ -1,0 +1,60 @@
+<Introduction>
+
+<Background>
+So first, a little background on end-use load research in general as far as what has been done and what is available: the first large end-use load study was conducted in the late 1980s - The End-Use Load and Consumer Assessment Program or ELCAP. ELCAP was undertaken by the Bonneville Power Administration from 1986 through 1989 in an effort to obtain hourly and sub-hourly electricity demand information from a variety of residential and commercial end-uses. Since then, new technologies and the ways we use energy have changed dramatically.
+
+ELCAP was, and stil is very widely used and was the only such effort until 2012. At that time, NEEA started the RBSA Metering Project, which piggy-backed off of the original RBSA. This effort selected a representative sample of 100 homes from RBSA and metered nearly all hard-wired or permanently plugged in end-uses in the home at 15-minute intervals. This represents approximately 75% of the home load and collected data from 2012-2014 and remains the latest large scale effort to measure actual end-uses.
+
+Additionally, in 2012 the Pecan Street Project began collecting some circuit level data in 2012 in Austin Texas. Launched in 2009, Pecan Street’s research network originally was a test bed in Austin collecting data for select timeframes throughout the year. It now includes data from more than 1,000 homes in four states (Texas, California, Colorado and New York) including 250 solar homes and 65 electric vehicle owners. Each home’s energy generation and use is measured at the circuit level at intervals ranging from one second to one minute — 24/7/365. Access to the data starts at $100,000 per year.
+
+While there have been other efforts, NEEA has identified more than 40 studies in the previous decade alone, nearly all of these studies were small or otherwise limited, or used modeling rather than measurements.  
+
+<Current EULR>
+Because of the RBSAM study, the region saw the value of updated end-use loads and fostered the desire for more information, ultimately leading to the current EULR project. EULR study is a five-year, $12.5 million effort to collect data on selected electric end-uses in 400 residential (Home energy Metering Study or HEMS) and 70 commercial buildings (the Commercial Metering Study or CEMS). Funding for EULR is being provided outside of NEEA’s 2020-2024 Business Plan and comes via special funding from Alliance utilities and NREL. 
+
+Metering for EULR is at the circuit level, rather than specific end-use loads as in RBSAM, but it is at a finer resolution at 1-minute intervals. The sampling is designed so that both HEMS and CEMS focus on electric HVAC end uses and heat pump water heaters as priorities, with metering quotas by end use established based upon their prevalence within the sample population. As many other circuit level end uses, and other combined circuits, would also be metered as feasible.
+
+A key, unique value to HEMS and CEMS is their connection to the RBSA and CBSA data. While EULR is not part of these studies, they are recruited from them to the extent possible, so all of the rich data from the stock assessments can be connected to the end-use data. In a small number of cases, sites needed to be recruited outside of a stock assessment in which case a stock assessment outside of RBSA or CBSA was conducted on those sites.
+
+The availability of the stock assessment data that can be attached to the EULR data makes HEMS and CEMS unique. Even Pecan Street, with its more granular interval and larger size doesn't have the depth of data about the site itself that is available via RBSA. No one currently has any commercial interval end-use data, let alone the depth of site data available from CBSA.
+
+<How we capture>
+To capture this data, we need access to the site's electric panel. Transducers are attached to each circuit, which are connected to an eGauge meter. When possible, all circuits are metered, but in some case, this is nto possible so ciruits with priority end-uses are prioritized.
+
+Additioanlly, whe feasible, temperature sensors are located inside the site and on the extrior. These connect to a Miratron receiver. When exterior sensors aren't feasible for one reason to another, data from the nearest weather station is used.
+
+All data the utilizes a wireless gateway to get to the contractor's servers. The contractor converts the data to a readable format and transmits it to us into Snowflake Cloud services. We have all of the data, raw as well as processed, available via Snowflake.
+
+<What it is, what it isn't>
+First, EULR is not designed or intended to be a representative sample. The priority was to get more in-depth data on electric HVAC and Heat Pump Water Heaters. As such, some home types, or many commercial building types are not represented in these data. Additionally, because of resource constraints - recruiting is expensive, recruiting sites with these end-uses was priortized over having a necessarily random sample of these end-uses so there is some selection bias in these sites.
+
+This needs to be considered when using EULR. These data cannot be directly extrapolated to the population. Some end-uses may have sample sizes large enough to be more representative but even here, caution needs to be excercised. Because we have connected EULR to the stock assessments, they can provide a lot of context with the data to understand how to best utilize it.
+
+As mentioned, EULR focuses on end-uses - specifically on electric HVAC and Heat Pump water heaters. It is not designed to have a representative sample of all end-uses. A home has to have electric HVAC or a HPWH to be in the study and any without at least one of these would not be in the study.
+
+The structure and design of this data does not lend it self to predicitive analysis, but it can be useful for explanatory analysis. Specifically, is optimized to analyze end-use loads - when energy is used (think peak loads) rather than how much is used. It is good at understanding what is impacting load at a given time rather than how big that load is.
+
+
+<>How it relates to VSHP>
+EULR, and specifically HEMS for residential, in and of itself doesn't have much information on heatpumps, other than that it exists at the site and then what its energy use by minute is. We will have actual kW - though not presently weather normalized, as well as apparent power, the power factor, and total harmonic distortion. We will also have outside weather data (temp, humidity) and in many cases, we will also have some temperature sensors in the home.
+
+Any additional data will need to come from RBSA. It should be noted, that the HEMS sites were partially recruited from RBSA II (about 45%) and partially recruited from the current RBSA III (about 45%). Some sites – about 10% – were not able to be recruited from either RBSA, so an additional, and in some cases a cut down, RBSA is conducted. 
+
+Once this is all completed, we will need to combine all the different RBSA data. In some of these cases, variables may have been added, deleted, or changed. We are in the process of finishing the current RBSA and putting it all together to understand what combined data we actually have.
+
+RBSA will inform how many heatpumps are in the region and where they are located. Make and model was collected in RBSA, which should enable identification of VSHPs. However, we won’t know more until the current RBSA is finalized and it will be subject to how well we were able to get make/models and do model matching. 
+
+Bear in mind, not all of these sites are part of EULR and a great deal of the EULR homes came out of the last RBSA. In at least a couple of cases, it appears that there has been a new HP installed since the last RBSA was completed so we may not know information about that. Around 2/3ds of single family homes in RBSA will have total annual usage but none, other than those in EULR, will have any sub-metered data.
+
+In addition to make/model, RBSA attempted to get capacity and age, reported set point (not actual), and other data as well as photographs, though not mainenance information. RBSA also collected data on ducting as it was able and did duct testing on a sample of homes. There will also be a great deal of envelope information – size, windows, insulation, etc. as well as climate zone. 
+
+Once the current RBSA is finalized, we will have a lot more information on how good the data coverage is. After that, the data can be blended with the last RBSA and combine with EULR to better understand what all we have there. It is good to keep in mind here that often, especially with areas of interest that have a small populations, the value of RBSA is often to help focus further research rather than to provide every answer. 
+
+<The Data>
+
+
+
+EULR stands for end-use load research.
+By Definition:
+According to the Association of Edison Illuminating Utilities or AEIC, end-use load research is an activity embracing the measurement and study of the characteristic of electric loads to provide a thorough & reliable knowledge of trends, and general behavior of the load characteristics of the customers serviced by the electrical industry. 
+

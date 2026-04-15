@@ -1,0 +1,34 @@
+DATA EV_POINT;
+SET HEMS_15.POINTS_ALT;
+WHERE circuit_label_type_desc="Electric Vehicle Charger";
+ev_flag=1;
+keep EE_SITE_id flag;
+run;
+
+PROC SORT DATA=EV_POINT;
+	BY EE_SITE_id;
+
+DATA POWER_15M (COMPRESS="YES");
+SET HEMS_15.POWER_15M;
+KEEP EE_SITE_id min_t max_t YEAR MONTH DAY YEAR HOUR MINUTE MINTY YMDHM MAINS 'Mains With Solar'n 'Mains Without Solar'n 'Electric Vehicle Charger'n;
+RUN;
+PROC SORT DATA=POWER_15M THREADS;
+	BY EE_SITE_id min_t;
+
+
+data EV (COMPRESS="YES");
+ MERGE POWER_15M(IN=i) EV_POINT(IN=j);
+	BY EE_SITE_id;
+	IF j=1 THEN OUTPUT;
+RUN; 
+
+PROC SORT DATA = HEMS_15.SITES THREADS;
+	BY ee_site_id;
+
+PROC SORT DATA = HEMS_15.WEATHER_FIFTEEN THREADS;
+	BY ee_site_id;	
+
+DATA WEATHER_FIFTEEN_ALT (COMPRESS="YES");
+	MERGE HEMS_15.SITES HEMS_15.WEATHER_FIFTEEN;
+	BY ee_site_id;	
+RUN;

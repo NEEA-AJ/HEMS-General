@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (example – adjust to your needs)
+data/raw/
+data/tmp/
+*.log
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+
+
+other/
+"notes and references"/
